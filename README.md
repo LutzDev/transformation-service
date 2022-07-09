@@ -18,11 +18,12 @@ docker-compose build && docker-compose up -d
     │   ├── main                        
     │   │   ├── kotlin                  
     │   │   │   └── com.example         
-    │   │   │       └── plugins         # used plugins
-    │   │   │       └── routes          # REST-API routes   
+    │   │   │       ├─ plugins          # used plugins
+    │   │   │       ├─ routes           # REST-API routes   
     │   │   │       └── service         # logic of jolt   
     │   │   └── ressources             
-    │   │       └── specifications      # jolt-specifications
+    │   │       ├─ specifications       # jolt-specifications
+    │   │       ├─ application.conf     # define server specifications
     │   │       └── logback.xml         # Defines the Logging-Frameworks
     │   └── test                        # Automated tests
     └── ...                             # Configuration files for gradle and docker
