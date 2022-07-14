@@ -1,0 +1,31 @@
+[
+  [
+    {
+      "operation": "remove",
+      "spec": {
+        "inkVersion": "",
+        "root": {
+          "0": "",
+          "1": ""
+        },
+        "listDefs": ""
+      }
+    },
+    {
+      "operation": "shift",
+      "spec": {
+        "*": "flows"
+      }
+    },
+    {
+      "operation": "shift",
+      "spec": {
+        "flows": {
+          "*": {
+            "*": "flows.&"
+          }
+        }
+      }
+    }
+  ]
+]

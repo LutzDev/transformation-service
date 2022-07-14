@@ -17,7 +17,7 @@ docker-compose build && docker-compose up -d
     ├── src                             # Source files
     │   ├── main                        
     │   │   ├── kotlin                  
-    │   │   │   └── com.example         
+    │   │   │   └── com.transformation         
     │   │   │       ├─ plugins          # used plugins
     │   │   │       ├─ routes           # REST-API routes   
     │   │   │       └── service         # logic of jolt   

@@ -1,0 +1,110 @@
+{
+  "inkVersion": 20,
+  "root": [
+    [
+      {
+        "->": "start"
+      },
+      [
+        "done",
+        {
+          "#f": 5,
+          "#n": "g-0"
+        }
+      ],
+      null
+    ],
+    "done",
+    {
+      "start": [
+        "^Willkommen bei der Intervention",
+        "\n",
+        {
+          "->": "einführung"
+        },
+        {
+          "#f": 1
+        }
+      ],
+      "einführung": [
+        "^Ich bin ihr Assistent und führe Sie durch die Intervention",
+        "\n",
+        {
+          "->": "registration"
+        },
+        {
+          "#f": 1
+        }
+      ],
+      "registration": [
+        [
+          {
+            "#": "Hier findet die Chatbot-Registrierung statt"
+          },
+          "^$chatbot$init",
+          "\n",
+          "ev",
+          "str",
+          "^Ernährung",
+          "/str",
+          "/ev",
+          {
+            "*": ".^.c-0",
+            "flg": 4
+          },
+          "ev",
+          "str",
+          "^Bewegung",
+          "/str",
+          "/ev",
+          {
+            "*": ".^.c-1",
+            "flg": 4
+          },
+          {
+            "c-0": [
+              "^ ",
+              {
+                "->": "ernährung"
+              },
+              "\n",
+              {
+                "#f": 5
+              }
+            ],
+            "c-1": [
+              "^ ",
+              {
+                "->": "bewegung"
+              },
+              "\n",
+              {
+                "#f": 5
+              }
+            ]
+          }
+        ],
+        {
+          "#f": 1
+        }
+      ],
+      "ernährung": [
+        "^Hier startet die Ernährungs-Sektion",
+        "\n",
+        "end",
+        {
+          "#f": 1
+        }
+      ],
+      "bewegung": [
+        "^Hier startet die Bewegungs-Sektion",
+        "\n",
+        "end",
+        {
+          "#f": 1
+        }
+      ],
+      "#f": 1
+    }
+  ]
+}
