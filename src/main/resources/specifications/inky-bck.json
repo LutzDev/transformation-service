@@ -8,7 +8,7 @@
   },
 
 
-  // shift flow-parts (start, einführung,...) directly under flows --> flatten
+  // shift flow-parts -> flatten (start, einführung,...) directly under flows --> flatten
   {
     "operation": "shift",
     "spec": {
@@ -28,6 +28,9 @@
         "*": {
           "->": "&2.init.link",
           "*": {
+            "^>>> *": {
+              "$": "&4.&3.type"
+            },
             "^*": {
               "$": "&4.&3.message",
               "#text": "&4.&3.type"
@@ -36,7 +39,7 @@
             "\\#": "&3.&2.comment",
             "*": {
               "\\#": "&4.&3.comment",
-              "^\\$*": {
+              "^>>> *": {
                 "$": "&5.&4.type"
               },
               "c-*": {
@@ -143,6 +146,69 @@
     }
   },
 
+  // ================ Handle Default link values ==========
+  // Set key of object as value of object
+  {
+    "operation": "shift",
+    "spec": {
+      "flows": {
+        "*": {
+          "$": "&2.&1.key",
+          "*": "&2.&1.&"
+        }
+      }
+    }
+  },
+
+  // If link is ^.^.^.^set key of object as new link value
+  {
+    "operation": "shift",
+    "spec": {
+      "flows": {
+        "*": {
+          "links": {
+            "*": {
+              "link": {
+                "*.^": {
+                  "@(4,key)": "&6.&5.&4.&3.link"
+                }
+              }
+            },
+            "@": "&3.&2.&"
+          },
+          "*": "&2.&1.&"
+        }
+      }
+    }
+  },
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "flows": {
+        "*": {
+          "links": {
+            "*": {
+              "link": "=lastElement(@(1,link))"
+            }
+          }
+        }
+      }
+    }
+  },
+  // Löscht ^ aus den Values, message, type
+  {
+    "operation": "modify-overwrite-beta",
+    "spec": {
+      "flows": {
+        "*": {
+          "type_split": "=split('\\$',@(1,type))",
+          "type": "@(1,type_split[0])",
+          "ref": "@(1,type_split[1])"
+        }
+      }
+    }
+  },
+
   // Löscht ^ aus den Values, message, type
   {
     "operation": "modify-overwrite-beta",
@@ -151,7 +217,7 @@
         "*": {
           "message_split": "=split('\\^',@(1,message))",
           "message": "=join('',@(1,message_split))",
-          "type_split": "=split('\\^',@(1,type))",
+          "type_split": "=split('\\^>>> ',@(1,type))",
           "type": "=join('',@(1,type_split))"
         }
       }
@@ -184,6 +250,7 @@
           "type": ""
         },
         "*": {
+          "key": "",
           "temp": "",
           "message_split": "",
           "type_split": ""
@@ -208,3 +275,4 @@
     }
   }
 ]
+
