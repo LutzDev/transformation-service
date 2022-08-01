@@ -10,6 +10,7 @@ class TransformationService(tool: Tool ) {
     private val tool = tool
 
     fun transform(input: Map<Any, Any>): Map<Any, Any> {
+        println("Transform was called")
         val chainrSpecJSON = JsonUtils.classpathToList(tool.specPath)
         val chainr = Chainr.fromSpec(chainrSpecJSON)
         val output: Map<Any, Any> = chainr.transform(input) as Map<Any, Any>
