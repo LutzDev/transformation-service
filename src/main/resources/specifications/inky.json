@@ -1,5 +1,4 @@
 [
-  // rename root to flow
   {
     "operation": "shift",
     "spec": {
@@ -7,8 +6,6 @@
     }
   },
 
-
-  // shift flow-parts -> flatten (start, einführung,...) directly under flows --> flatten
   {
     "operation": "shift",
     "spec": {
@@ -20,7 +17,6 @@
     }
   },
 
-  // Big logic
   {
     "operation": "shift",
     "spec": {
@@ -60,11 +56,9 @@
     }
   },
 
-  // Set default type = null if type does not exist
   {
     "operation": "modify-default-beta",
     "spec": {
-      // If c does not exists add the c with default value as null
       "flows": {
         "*": {
           "type": "null"
@@ -73,7 +67,6 @@
     }
   },
 
-  // Set type to button, if flow does links but no custom keyword
   {
     "operation": "shift",
     "spec": {
@@ -106,7 +99,6 @@
     }
   },
 
-  // Arrays miteinander kombinieren
   {
     "operation": "shift",
     "spec": {
@@ -124,7 +116,6 @@
     }
   },
 
-  // Flatten links array and make result as new key of object
   {
     "operation": "shift",
     "spec": {
@@ -146,8 +137,6 @@
     }
   },
 
-  // ================ Handle Default link values ==========
-  // Set key of object as value of object
   {
     "operation": "shift",
     "spec": {
@@ -160,7 +149,6 @@
     }
   },
 
-  // If link is ^.^.^.^set key of object as new link value
   {
     "operation": "shift",
     "spec": {
@@ -195,7 +183,7 @@
       }
     }
   },
-  // Split Keyword and ref in two keys
+
   {
     "operation": "modify-overwrite-beta",
     "spec": {
@@ -209,23 +197,18 @@
     }
   },
 
-
-  // Löscht ^ aus den Values, message, type
   {
     "operation": "modify-overwrite-beta",
     "spec": {
       "flows": {
         "*": {
           "messages_split": "=split('\\^',@(1,messages_temp))",
-          //"message": "=join('',@(1,message_split))",
           "type_split": "=split('\\^>>> ',@(1,type))",
           "type": "=join('',@(1,type_split))"
         }
       }
     }
   },
-
-  // ============= Message split operations
 
   {
     "operation": "shift",
@@ -241,7 +224,6 @@
     }
   },
 
-  // Löscht ^ aus dem Key der einzelnen Links-Objektn
   {
     "operation": "shift",
     "spec": {
@@ -285,9 +267,6 @@
     }
   },
 
-  // Löscht das temp array raus;
-  // Löscht type von init flow raus
-  // Löscht temporäre keys raus wie message_length, welche für den substring nötig waren
   {
     "operation": "remove",
     "spec": {
@@ -306,7 +285,6 @@
     }
   },
 
-  // Löscht alle null werte aus dem json (Bsp. im Ernährungsobject war noch ein Ernaährung: null, link: "linkname"
   {
     "operation": "modify-overwrite-beta",
     "spec": {
@@ -314,7 +292,6 @@
     }
   },
 
-  // Sortiert alle Objecte nach namen
   {
     "operation": "sort",
     "spec": {

@@ -17,17 +17,10 @@ fun Routing.configureInkyRouting() {
     val inkyTransformation = TransformationService(Tool.INKY)
 
     route("/transform/inky") {
-        get {
-            call.respond(mapOf("tool" to "inky"))
-        }
         post {
-            //println("post to inky path")
             val data = call.receive<Map<Any, Any>>()
-            //println(data)
             val output: Map<Any, Any> = inkyTransformation.transform(data)
-            println(output)
             call.respond(output)
-            //call.respondText("Datei wurde erfolgreich hochgeladen")
         }
     }
 }
