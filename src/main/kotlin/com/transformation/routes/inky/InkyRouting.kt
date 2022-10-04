@@ -17,6 +17,9 @@ fun Routing.configureInkyRouting() {
     val inkyTransformation = TransformationService(Tool.INKY)
 
     route("/transform/inky") {
+        get {
+            call.respondText("hello")
+        }
         post {
             val data = call.receive<Map<Any, Any>>()
             val output: Map<Any, Any> = inkyTransformation.transform(data)
